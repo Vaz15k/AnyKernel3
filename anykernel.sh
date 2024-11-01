@@ -23,6 +23,7 @@ block=boot
 is_slot_device=auto
 ramdisk_compression=auto
 patch_vbmeta_flag=auto
+NO_MAGISK_CHECK=1
 
 # import functions/variables and setup patching - see for reference (DO NOT REMOVE)
 . tools/ak3-core.sh
