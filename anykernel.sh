@@ -12,7 +12,7 @@ do.systemless=1
 do.cleanup=1
 do.cleanuponabort=0
 device.soc=s5e8835
-supported.versions=13, 14
+supported.versions=13 - 17
 supported.patchlevels=
 supported.vendorpatchlevels=
 '; } # end properties
