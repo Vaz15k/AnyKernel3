@@ -37,3 +37,5 @@ else
     write_boot # use flash_boot to skip ramdisk repack, e.g. for devices with init_boot ramdisk
 fi
 ## end boot install
+
+flash_generic vendor_boot;
