@@ -4,38 +4,39 @@
 ### AnyKernel setup
 # global properties
 properties() { '
-kernel.string= Squeak Kernel || by Vaz15K
-do.devicecheck=0
-do.soccheck=1
+kernel.string=KSU Kernel for gauguin
+do.devicecheck=1
 do.modules=0
 do.systemless=1
 do.cleanup=1
-do.cleanuponabort=0
-device.soc=s5e8835
-supported.versions=13 - 17
+do.cleanuponabort=1
+device.name1=gauguinpro
+device.name2=gauguininpro
+device.name3=gauguinin
+device.name4=gauguin
+device.name5=
+supported.versions=
 supported.patchlevels=
 supported.vendorpatchlevels=
 '; } # end properties
 
+
 ### AnyKernel install
+## boot files attributes
+boot_attributes() {
+set_perm_recursive 0 0 755 644 $RAMDISK/*;
+set_perm_recursive 0 0 750 750 $RAMDISK/init* $RAMDISK/sbin;
+} # end attributes
+
 # boot shell variables
-block=boot
-is_slot_device=auto
-ramdisk_compression=auto
-patch_vbmeta_flag=auto
-NO_MAGISK_CHECK=1
+BLOCK=/dev/block/bootdevice/by-name/boot;
+IS_SLOT_DEVICE=0;
+RAMDISK_COMPRESSION=auto;
+PATCH_VBMETA_FLAG=auto;
 
 # import functions/variables and setup patching - see for reference (DO NOT REMOVE)
-. tools/ak3-core.sh
+. tools/ak3-core.sh;
 
 # boot install
-if [ -L "/dev/block/bootdevice/by-name/init_boot_a" -o -L "/dev/block/by-name/init_boot_a" ] || [ -L "/dev/block/bootdevice/by-name/init_boot" -o -L "/dev/block/by-name/init_boot" ]; then
-    split_boot # for devices with init_boot ramdisk
-    flash_boot # for devices with init_boot ramdisk
-else
-    dump_boot # use split_boot to skip ramdisk unpack, e.g. for devices with init_boot ramdisk
-    write_boot # use flash_boot to skip ramdisk repack, e.g. for devices with init_boot ramdisk
-fi
-## end boot install
-
-flash_generic vendor_boot;
+dump_boot;
+write_boot;
